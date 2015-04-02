@@ -10,7 +10,7 @@
   <meta name="fragment" content="!" />
   <base href="/" />
   <!-- Responsive META -->
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-salable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <!-- Semantic META -->
@@ -41,46 +41,37 @@
 </head>
 
 <body class="ng-cloak">
-  <div layout="column" layout-fill>
-    <md-toolbar>
-      <header data-ng-include="'/modules/core/views/header.client.view.html'" class="md-toolbar-tools"></header>
-      <md-content class="md-padding">
-        {% block content %}{% endblock %}
-      </md-content>
-    </md-toolbar>
-  </div>
+  <section id="main" layout="column" layout-fill flex>
+    <header data-ng-include="'/modules/core/views/header.client.view.html'"></header>
+    <md-content class="md-padding">
+      {% block content %}{% endblock %}
+    </md-content>
+  </section>
   <!--Embedding The User Object-->
   <script type="text/javascript">
-  var user = {
-    {
-      user | json | safe
-    }
-  };
+    var user = {{ user | json | safe }};
   </script>
+  
   <!--Load The Socket.io File-->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
   <!--Application JavaScript Files-->
-  {% for jsFile in jsFiles %}
-  <script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} {% if process.env.NODE_ENV === 'development' %}
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+
+  {% if process.env.NODE_ENV === 'development' %}
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
   {% endif %}
+
   <!-- Google Analytics -->
   <script>
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '{{googleAnalyticsTrackingID}}', 'auto');
-  ga('send', 'pageview');
+    ga('create', '{{googleAnalyticsTrackingID}}', 'auto');
+    ga('send', 'pageview');
   </script>
 </body>
 
