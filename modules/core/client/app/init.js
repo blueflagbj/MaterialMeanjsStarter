@@ -23,7 +23,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
             .accentPalette('pink')
             .backgroundPalette('grey-background');
 
-        var spritePath = 'bower_components/material-design-icons/sprites/svg-sprite/';
+        var spritePath = 'lib/material-design-icons/sprites/svg-sprite/';
         $mdIconProvider.iconSet('navigation', spritePath + 'svg-sprite-navigation.svg');
         $mdIconProvider.iconSet('action', spritePath + 'svg-sprite-action.svg');
         $mdIconProvider.iconSet('content', spritePath + 'svg-sprite-content.svg');
